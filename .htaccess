@@ -1,0 +1,4 @@
+AuthType      Basic
+AuthName      "KV2020 WEB"
+AuthUserFile  ./.htpasswd
+require valid-user
