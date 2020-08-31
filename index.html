@@ -35,7 +35,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Design Explorer 2</title>
+    <title>KKE auto select</title>
 
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="icon" type="image/png" href="favicon.png">
@@ -154,9 +154,6 @@
                 showStillLink();
             }
 
-            //updateLayoutOnDeselect();
-
-            //d3.select("#welcome").style("display", "none");
         } else {
             alert("You have to put Google Drive Folder information first!");
         }
@@ -276,7 +273,7 @@
                 </button>
 
                 <div class="navbar-header" title="Design Explorer">
-                    <a href="http://tt-acm.github.io/DesignExplorer/"> <img style="max-width:350px; padding-top: 10px;" src="./img/DesignExplorerLogo3.png"></a>
+                    <a href="http://ec2-3-19-47-35.us-east-2.compute.amazonaws.com/DesignExplorer-gh-pages/index.html"> <img style="max-width:350px; padding-top: 10px;" src="./img/DesignExplorerLogo3.png"></a>
                 </div>
             </div>
 
@@ -308,12 +305,8 @@
                 <div class="legend col-xs-12" id="legend">
                     <!--place holder for legends-->
                 </div>
-                <!--<div id="sliders-heading" class="sidebar-brand" style="text-align:center">
-                    LOAD YOUR DATA!
-                </div>-->
                 <div class="inputSliders col-xs-11" id="inputSliders">
                     <form class="sliders">
-                        <!-- I will use this form to disable all the sliders together. -->
                     </form>
                 </div>
                 <div id="sliders-report" class="sidebar-brand col-xs-12" style="text-align:center"></div>
@@ -339,26 +332,23 @@
                                     <button type="button" class="btn btn-default btn-xs" id="pcgraph" data-toggle="collapse">
                                         <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
                                     </button>
-                                    <button id="reset" class="btn btn-default btn-xs">Reset Selection</button>
-                                    <button id="remove" class="btn btn-default btn-xs">Exclude Selection</button>
-                                    <button id="keep" class="btn btn-default btn-xs">Zoom to Selection</button>
-                                    <button id="savecsv" class="btn btn-default btn-xs" onclick="saveToCSV()">Save Selection to File</button>
-                                    <button id="stilllink" class="btn btn-default btn-xs" onclick="showStillLink()">My Static Link</button>
-                                    <a class="btn btn-default btn-xs" href="http://www.mpendesign.com/category/tutorial/" target="_blank">Tutorial</a>
-                                    <a class="btn btn-default btn-xs" href="https://www.thorntontomasetti.com/services/sustainability/" target="_blank">Services</a>
-                                    <a href="https://github.com/tt-acm/DesignExplorer/wiki" class="btn btn-default btn-xs" target="_blank">
-                                        Info <span class="glyphicon glyphicon-new-window"></span>
-                                    </a>
+                                    <button id="reset" class="btn btn-default btn-xs">絞り込み解除</button>
+                                    <button id="remove" class="btn btn-default btn-xs">選択範囲反転</button>
+                                    <button id="keep" class="btn btn-default btn-xs">選択範囲拡大</button>
+                                    <button id="axissimple" class="btn btn-default btn-xs">軸シンプル</button>
+                                    <button id="axisalldisplay" class="btn btn-default btn-xs">全軸表示</button>
+                                    <button id="savecsv" class="btn btn-default btn-xs" onclick="saveToCSV()">CSVファイル出力</button>
+                                    <button id="stilllink" class="btn btn-default btn-xs" onclick="showStillLink()">リンク</button>
 
                                     <!-- Change label size -->
                                     <div class="btn-group col-xs-3" style="width: auto;float: right;">
-                                        <button id="dataSetting" class="btn btn-default btn-xs" onclick="dataSetting(graph)" title="Setting">Setting</button>
+                                        <button id="dataSetting" class="btn btn-default btn-xs" title="Setting">文字サイズ変更</button>
                                         <button id="LL" class="btn btn-default btn-xs" onclick="changeLabelSize('largeLabel')" title="Large Label">L</button>
                                         <button id="MM" class="btn btn-default btn-xs" onclick="changeLabelSize('mediumLabel')" title="Medium Label">M</button>
                                         <button id="SS" class="btn btn-default btn-xs" onclick="changeLabelSize('smallLabel')" title="Small Label">S</button>
-                                        <button id="pcFullScreen-toggle" class="btn btn-default btn-xs" title="Full Screen">
+                                        <!-- <button id="pcFullScreen-toggle" class="btn btn-default btn-xs" title="Full Screen">
                                             <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
-                                        </button>
+                                        </button> -->
                                     </div>
                                 </div>
                                 
@@ -377,7 +367,7 @@
                         <!-- start of right side charts-->
                         <div id="ScChartWrapper" class="col-lg-3">
 
-                            <div class="row-fluid">
+                            <div class="row-fluid" style="display:none;">
                                 <div id="rightTopButtonGroup" class="btn-group col-xs-12">
                                     <button type="button" class="btn btn-default btn-xs" id="scatter-fullscreen-toggle" title="Full Screen">
                                         <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
@@ -385,9 +375,6 @@
                                     <a id="copyRightButton" href="http://core.thorntontomasetti.com/" class="btn btn-default btn-xs" target="_blank" style="width: calc(100% - 46px);">
                                         &copy; 2019 Thornton Tomasetti
                                     </a>
-                                    <!--<button type="button" class="btn btn-default btn-xs" id="rcgraph" data-toggle="collapse" data-target="#radarChart">
-                                        <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
-                                    </button>-->
                                     <button type="button" class="btn btn-default btn-xs" id="scatter-menu-toggle" title="Show Dimensions">
                                         <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
                                     </button>
@@ -395,13 +382,9 @@
                             </div>
 
                             <div class="row chartSide">
-
-                                <div id="radarChart" class="col-lg-12 collaps in center-block" style="font-size:14px; font-weight:bold">
-                                    <!-- // <h5>Radar Chart Place Holder</h5> -->
+                                <div id="radarChart" class="col-lg-12 collaps in center-block" style="font-size:14px; font-weight:bold;">
+                                    <img style="max-width:350px; padding-top: 10px;" src="./img/righttop_sample.png">
                                 </div>
-                                <!--<div id="scatterChart" class="col-lg-12 collaps in center-block">
-                                        place holder for the scatterChart
-                                </div>-->
                             </div>
 
                         </div>
@@ -451,7 +434,10 @@
                                 <input class="star" type="radio" name="rating" value="5" />
                             </form>
                             <form class="dropdown imgSwitch"></form>
-
+                            <FORM>
+                                <!-- <INPUT type="button" value="link test" onClick="window.open('https://www.google.com')" class="testtesttest"> -->
+                                <INPUT type="button" value="link test" onClick="getURL_myView()" class="testtesttest">
+                            </FORM>
                         </div>
                         <div id="viewer3d" style="width:100%; height:100%" class="hidden">
                             <!-- place holder for the viewer -->
@@ -475,49 +461,20 @@
 
                 </div>
             </div>
+            
             <!-- /#Welcome content -->
             <div class="row-fluid col-lg-12 row-centered vertical-center fullscreen popupWindow" id="welcome">
-                <div class="col-sm-12 col-centered" id="welcomeContainer">
+                <div class="col-sm-12 col-centered" id="welcomeContainer" style=" display:none;">
                     <button class="btn btn-default btn-sm pull-right popupWindowClose">
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
                     <br>
-                    <h1 class="text-center" style="margin-top: 1em;"> Welcome to Design Explorer!</h1>
+                    <!-- <h1 class="text-center" style="margin-top: 1em;"> Welcome to Design Explorer!</h1> -->
                     <h4 class="text-center">
-                        Design Explorer is an open source tool for exploring multi-dimensional parametric studies!
+                        データ読み込み完了までお待ちください
                     </h4>
                     <br>
 
-                    <h5 class="text-center">Try one of following sample design sets or load your own data.<a href="http://www.mpendesign.com/category/tutorial/" target="_blank"> (Tutorial)</a></h5> 
-                    <h5 class="text-center"></h5>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <img src="img/RedBox.gif" class="sampleImage image-rounded" id="sample1">
-                        </div>
-                        <div class="col-sm-4">
-                            <img src="img/Daylighting.gif" class="sampleImage image-rounded" id="sample2">
-                        </div>
-                        <div class="col-sm-4">
-                            <img src="img/BoxBuilding.gif" class="sampleImage image-rounded" id="sample3">
-                        </div>
-                        <br>
-                        <br>
-                    </div>
-                    <div class="col-lg-12" style="position: absolute;bottom: 2em;width: calc(100% - 60px);">
-                        <h3 class="text-center"> Happy Exploring! </h3>
-                        <h5 class="text-center">v2 (08/15/2019)</h5>
-                        <br>
-                        <h5 class="text-center">
-                            &copy; CORE studio | Thornton Tomasetti |
-                            <a href="http://core.thorntontomasetti.com/about" target="_blank"> About</a> |
-                            <a href="http://core.thorntontomasetti.com/about/services" target="_blank">Services</a> |
-                            <a href="http://core.thorntontomasetti.com/about/contact" target="_blank">Contact</a>
-                        </h5>
-                        <h5 class="text-center">
-                            Updated by
-                            <a href="http://www.mpendesign.com" target="_blank">Mingbo Peng</a>
-                        </h5>
-                    </div>
                 </div>
 
                 <!--load data div-->
@@ -718,17 +675,18 @@
                 selectedData = graph.data();
 
             }
+            // 右上散布図のレンダリング（表示）を阻止
             var sm = new ScatterMatrix("", selectedData, '#radarChart');
             sm.cellSize((pcHeight - 60) / 2);
-            sm.render();
+            // sm.render();
 
-            // adjust the chart style
-            //var chartWidth = d3.select(".scatter-matrix-svg svg").style("width").replace("px", "");
-            d3.select(".scatter-matrix-svg")
-                .style("width", pcHeight - 10 + "px");
+            // // adjust the chart style
+            // //var chartWidth = d3.select(".scatter-matrix-svg svg").style("width").replace("px", "");
+            // d3.select(".scatter-matrix-svg")
+            //     .style("width", pcHeight - 10 + "px");
 
-            d3.select(".scatter-matrix-control")
-                .style("height", pcHeight - 30 + "px");
+            // d3.select(".scatter-matrix-control")
+            //     .style("height", pcHeight - 30 + "px");
             
             scatterChart = sm;
 
@@ -1039,9 +997,16 @@
             unlighlightScatter();
 
             //show radar chart
-            $("#radarChart").collapse("show");
+            //$("#radarChart").collapse("show");
 
             isAnyItemSelected = false;
+        }
+
+        function getURL_myView(){
+            // View画面へのリンクを作成する（KV2020の方で使う）
+            //alert(makeUrl(graph.highlighted()[0].img,"img"));
+            //alert(graph.highlighted()[0].Name);
+            window.open(graph.highlighted()[0].img);
         }
 
         // hide/show parallel coordinates
@@ -1085,7 +1050,7 @@
                 
 
                  //mirror collapse behavior with radar chart
-                $("#radarChart").collapse("show");
+                //$("#radarChart").collapse("show");
 
                 //enable buttons
                 d3.select("#reset").classed("disabled", false);
@@ -1311,12 +1276,11 @@
         //set up heights of divs
         var opacity = 0.4;
 
-
         var pcIsColoredBy;
 
         var color = d3.scale.linear()
             .range(["#3182bd", "#f33"]);
-
+            //.range(["#31bd60", "#654bde"]); //color change
 
         var scatterHeight = d3.select("#ScChartWrapper").style("height").replace("px", "");
         window.addEventListener("resize", reDrawPcChart);
@@ -1362,7 +1326,7 @@
 
             // remove Rating for on page load
             var iniDimensions = d3.keys(cleanedKeys4pc).filter(function (d) {
-                return (d != "Rating") && (d != "Description");
+                return (d != "Rating") && (d != "Description") && (d != "Name");
             }).reduce(function (acc, cur) {
                 acc[cur] = {};
                 return acc;
@@ -1394,6 +1358,9 @@
                 .brushMode("1D-axes") // enable brushing
                 .interactive()
                 .reorderable();
+                
+                // 目盛りの色変更
+                //graph.svg.selectAll("text").style("fill", "gray");
 
             updateLabels();
 
@@ -1430,9 +1397,11 @@
             //modify axes
             d3.selectAll("path.domain")
                 .style("stroke", function (d, i) {
+                    // ここのreturnを固定にすれば軸名に関わらず色変更可能
                     return colorset[i];
                 });
-
+            // d3.selectAll("path.domain")
+            //     .style("stroke-dasharray", "4 4");
 
             setupPcLabelEvent();
 
@@ -1574,7 +1543,8 @@
     <script type="text/javascript">
         function addSortDropdowns() {
 
-            sortBy = d3.keys(graph.dimensions())[0]; // will be used to sort thumbnail images
+            //sortBy = d3.keys(graph.dimensions())[0]; // will be used to sort thumbnail images
+            sortBy = d3.keys(graph.dimensions())[d3.keys(graph.dimensions()).length - 1]; // 一番最後の要素を初期値として表示 
             ascending = true;
 
             var select = d3.select(".sorting")
@@ -1592,6 +1562,9 @@
                 })
                 .text(function (d) {
                     return d;
+                })
+                .attr("selected", function (d){
+                    return d === sortBy
                 });
 
             // add change event to resort images
@@ -1676,7 +1649,6 @@
         }
 
         function updateImageGrid(data, resizeImageDiv) {
-
             // this is based on bootstraps 12 column grid
             // we can replace it with a fancier version later
             var gridSizes = [1, 2, 3, 4, 6];
@@ -1803,7 +1775,8 @@
 
                     var newData = graph.brushed();
                     if (newData === false || newData.length === 0) {
-                        alert("You need to select some data to be kept!");
+                        //alert("You need to select some data to be kept!");
+                        alert("先に平行グラフの範囲を選択してください");
                     } else {
                         graph.data(newData).dimensions(d3.keys(graph.dimensions()));
                         updateSlidersTickValues(newData);
@@ -1817,7 +1790,8 @@
                     var selectedData = graph.brushed();
 
                     if (selectedData === false || selectedData.length === 0) {
-                        alert("You need to select some data to be removed!");
+                        //alert("You need to select some data to be removed!");
+                        alert("先に平行グラフの範囲を選択してください");
                     } else {
                         // update graph with new data
                         var newData = graph.data().filter(function (d) {
@@ -1838,6 +1812,79 @@
 
                 });
 
+            // 不要軸の非表示
+            d3.select("#axissimple")
+                .on("click", function () {
+                    // チェックを外す
+                    d3.selectAll("rect.legend").attr("class", function (d) {
+                        if (d.name == 'Rating' 
+                        || d.name == 'Description'
+                        || d.name == 'Name'
+                        || d.name == '床荷重方向'
+                        || d.name == '柱種別数'
+                        || d.name == '大梁種別数') {
+                            return 'legend disabled';
+                        }
+                        else{
+                            return 'legend';
+                        }
+                    });
+                    // グラフ描画変更
+                    dimensions.forEach(function (dim) {
+                        if (dim.name == 'Rating' 
+                        || dim.name == 'Description'
+                        || dim.name == 'Name'
+                        || dim.name == '床荷重方向'
+                        || dim.name == '柱種別数'
+                        || dim.name == '大梁種別数'){
+                            dim.enabled = false;
+                        }
+                        else{
+                            dim.enabled = true;
+                        }
+                    });
+                    var activeDimensions = dimensions.filter(function (d) {
+                        return d.enabled;
+                        }).map(function (d) {
+                            return d.name;
+                        });
+                    graph.dimensions(activeDimensions);
+                    if (activeDimensions.lastIndexOf(pcIsColoredBy) == -1) {
+                        update_colors(activeDimensions[0]);
+                    }
+                    if (graph.highlighted().length !== 0) graph.highlight(graph.highlighted());
+                        updateLabels();
+                });
+            
+            // 全軸表示
+            d3.select("#axisalldisplay")
+                .on("click", function () {
+                    // チェックを入れる
+                    d3.selectAll("rect.legend").attr("class", function (d) {
+                        if (d.name == "Description" || d.name == "Name")
+                            return 'legend disabled';
+                        else
+                            return 'legend';
+                    });
+                    // グラフ描画変更
+                    dimensions.forEach(function (dim) {
+                        if(dim.name == "Description" || dim.name == "Name")
+                            dim.enabled = false;
+                        else
+                            dim.enabled = true;
+                    });
+                    var activeDimensions = dimensions.filter(function (d) {
+                        return d.enabled;
+                        }).map(function (d) {
+                            return d.name;
+                        });
+                    graph.dimensions(activeDimensions);
+                    if (activeDimensions.lastIndexOf(pcIsColoredBy) == -1) {
+                        update_colors(activeDimensions[0]);
+                    }
+                    if (graph.highlighted().length !== 0) graph.highlight(graph.highlighted());
+                        updateLabels();
+                });
 
             function updateGraph(newData) {
                 
@@ -1893,9 +1940,13 @@
 
             //turn off rating rectangle
             d3.selectAll("rect.legend").attr("class", function (d) {
-                if (d.name == "Rating" || d.name == "Description") {
+                if (d.name == "Rating" || d.name == "Description" || d.name == "Name") {
                     d.enabled = false;
                     return 'legend disabled';
+                }
+                else{
+                    d.enabled =true;
+                    return 'legend';
                 }
             });
 
@@ -1943,7 +1994,8 @@
                         if (windowWidth<1200) {
                             oldpcWidth = windowWidth -70;
                         } else {
-                            oldpcWidth = windowWidth*0.75 - 30;
+                            //oldpcWidth = windowWidth*0.75 - 30;
+                            oldpcWidth = windowWidth - 30;
                         }
                         
                         //back to normal size mode
@@ -2004,28 +2056,12 @@
             // add thumbnails
             updateImageGrid(graph.data(), true); // true will set the size of btm div
 
-            
-
             // add place holder image to zoomed area
             //addPlaceHolderImage();
 
             // set up events between graphs
             setupEvents();
 
-            //lazy load
-            // $(function() {
-            //     $('.lazy').Lazy({
-            //         // your configuration goes here
-            //         scrollDirection: 'vertical',
-            //         effect: 'fadeIn',
-            //         visibleOnly: true,
-            //         onError: function(element) {
-            //             console.log('error loading ' + element.data('src'));
-            //         },
-            //         appendScroll: $('div#thumbnails-btm')
-
-            //     });
-            // });
         }
 
 
@@ -2043,11 +2079,13 @@
             } else {
                 // load default data
                 //parse the csv data from the design_explorer_data folder
-                d3.csv("design_explorer_data/default_onload.csv", function (data) {
+                d3.csv("design_explorer_data/data.csv", function (data) {
                     loadDataToDesignExplorer(data);
                     loadSetting("design_explorer_data/DefaultData/settings.json");
                     });
-
+                
+                d3.selectAll(".popupWindow")
+                    .style("display", "none");
             }
 
             //function to close intro window div
@@ -2126,7 +2164,6 @@
                 reader.readAsText(file);
                 d3.select("#welcome").style("display", "none");
             });
-
         }; // end of window.onload
 
     $(document).ready(function(){
@@ -2528,12 +2565,19 @@
             callback: function (value, link) {
                 // 'value' is the value selected
                 if (firstRating === true) {
-
                     //turn on rating rectangle
                     d3.selectAll("rect.legend")
                         .attr("class", function (d) {
-
                             if (d.name == "Rating") {
+                                d.enabled = true;
+                                return 'legend';
+                            }
+                            else if (d.name == "Description" || d.name == "Name"){
+                                d.enabled = false;
+                                return 'legend disabled';
+                            }
+                            // Rating以外は元の値をそのまま使いたいが…
+                            else{
                                 d.enabled = true;
                                 return 'legend';
                             }
@@ -2594,7 +2638,8 @@
             var data = graph.brushed() === false ? graph.data() : graph.brushed();
             var csvTitle = d3.keys(data[0]);
 
-            var csvContent = "data:attachment/csv;charset=utf-8,";
+            //var csvContent = "data:attachment/csv;charset=utf-8,";
+            var csvContent = "";
             var scidIndex = csvTitle.indexOf("scid");
             csvTitle.splice(scidIndex, 1);
 
@@ -2608,11 +2653,19 @@
 
             });
 
-            csvContent = encodeURI(csvContent);
+            // add BOM
+            let bom  = new Uint8Array([0xEF, 0xBB, 0xBF]);
+            let blob = new Blob([bom, csvContent], {type: 'text/csv'});
+            let url = (window.URL || window.webkitURL).createObjectURL(blob);
+
+            alert(url);
+            
+            //csvContent = encodeURI(csvContent);
 
             var a = d3.select("body")
                 .append("a")
-                .attr("href", csvContent)
+                //.attr("href", csvContent)
+                .attr("href", url)
                 .attr("target", '_blank')
                 .attr("download", 'DesignExplorer_SelectedResults.csv');
 
@@ -3001,7 +3054,7 @@
                      jsonFileLink = "design_explorer_data/settings.json"
 
                 }else {
-
+                    // GoogleDriveのアドレスだった場合
                     var jsonFile = settingFiles[0];
                     jsonFileLink = _googleReturnObj.settingFiles[jsonFile];
                 }
@@ -3018,10 +3071,7 @@
             
         }
 
-
-
     </script>
-
 
 </body>
 

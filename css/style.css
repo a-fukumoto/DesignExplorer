@@ -86,7 +86,7 @@ output {
 #thumbnails-btm img {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
+    border-radius: 0%;/*ここを50に変えると円になる*/
     border: .5em solid;
     top: 0;
     bottom: 0;
@@ -314,6 +314,9 @@ g.cell text {
     float: right;
 }
 
+#vis .testtesttest{
+    margin-top: 10px;
+}
 
 
 #tbContainer { padding-left: 60px;}
